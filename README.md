@@ -43,6 +43,14 @@ docker-compose up --build
 - `PUT /api/tasks/:id`
 - `DELETE /api/tasks/:id`
 
+- ## Live Demo
+
+Frontend:
+https://task-manager-frontend-henna-pi.vercel.app/
+
+Backend API:
+https://task-manager-ls4e.onrender.com
+
 ## Notes
 - The backend uses `uploads/` for PDF storage and serves files at `/uploads/*`.
 - The client reads API base URL from `VITE_API_URL`.
