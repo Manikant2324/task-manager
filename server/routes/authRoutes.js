@@ -1,26 +1,44 @@
-const express =
-require("express");
+import express from "express";
 
-const router =
-express.Router();
+const router = express.Router();
 
-const {
+router.post("/register", (req, res) => {
 
-  register,
-  login,
+  const { email, password } = req.body;
 
-} = require(
-  "../controllers/authController"
-);
+  res.json({
+    message: "Register Success",
+    user: {
+      email,
+    },
+  });
 
-router.post(
-  "/register",
-  register
-);
+});
 
-router.post(
-  "/login",
-  login
-);
+router.post("/login", (req, res) => {
 
-module.exports = router;
+  const { email, password } = req.body;
+
+  if (
+    email === "test@gmail.com" &&
+    password === "123456"
+  ) {
+
+    res.json({
+      token: "sampletoken",
+      user: {
+        email,
+      },
+    });
+
+  } else {
+
+    res.status(401).json({
+      message: "Invalid Credentials",
+    });
+
+  }
+
+});
+
+export default router;

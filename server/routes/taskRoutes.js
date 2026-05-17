@@ -1,85 +1,35 @@
-const express =
-require("express");
+import express from "express";
 
-const router =
-express.Router();
+const router = express.Router();
 
-const authMiddleware =
-require(
-  "../middleware/authMiddleware"
-);
+let tasks = [];
 
-const upload =
-require(
-  "../config/multer"
-);
+router.get("/", (req, res) => {
 
-const {
+  res.json(tasks);
 
-  createTask,
-  getTasks,
-  getTaskById,
-  updateTask,
-  deleteTask,
+});
 
-} = require(
-  "../controllers/taskController"
-);
+router.post("/", (req, res) => {
 
-router.post(
+  const newTask = {
 
-  "/",
+    _id: Date.now(),
 
-  authMiddleware,
+    title: req.body.title,
 
-  upload.array(
-    "documents",
-    3
-  ),
+    description: req.body.description,
 
-  createTask
+    priority: req.body.priority,
 
-);
+    status: req.body.status,
 
-router.get(
+  };
 
-  "/",
+  tasks.push(newTask);
 
-  authMiddleware,
+  res.json(newTask);
 
-  getTasks
+});
 
-);
-
-router.get(
-
-  "/:id",
-
-  authMiddleware,
-
-  getTaskById
-
-);
-
-router.put(
-
-  "/:id",
-
-  authMiddleware,
-
-  updateTask
-
-);
-
-router.delete(
-
-  "/:id",
-
-  authMiddleware,
-
-  deleteTask
-
-);
-
-module.exports =
-router;
+export default router;
