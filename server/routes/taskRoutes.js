@@ -67,6 +67,8 @@ router.put(
 
   authMiddleware,
 
+  upload.array("documents", 3),
+
   updateTask
 
 );
